@@ -16,6 +16,9 @@ matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 import numpy as np
 
+import warnings
+warnings.filterwarnings('ignore')
+
 '''
     0,0 ------> x (width)
      |
@@ -605,8 +608,11 @@ def get_map(MINOVERLAP, draw_plot, score_threhold=0.5, path = './map_out'):
                 area_under_curve_y = mprec[:-1] + [0.0] + [mprec[-1]]
                 plt.fill_between(area_under_curve_x, 0, area_under_curve_y, alpha=0.2, edgecolor='r')
 
-                fig = plt.gcf()
+                # fig = plt.gcf()
+                fig = plt.get_current_fig_manager()
                 fig.canvas.set_window_title('AP ' + class_name)
+                # fig.canvas.manager.set_windows_title('AP' + class_name)
+                fig = plt.gcf()
 
                 plt.title('class: ' + text)
                 plt.xlabel('Recall')
